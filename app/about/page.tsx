@@ -1,16 +1,18 @@
+import { Metadata } from 'next'
+import React from 'react'
 
-import type { Metadata } from 'next'
- 
-export const metadata: Metadata = {
-  title: 'My Page Title',
+
+
+
+export const metadata: Metadata ={
+  title:"About page"
 }
- 
-export default function Page() {
+const page = () => {
   return (
     <div className='bg-[#014E56] w-[1250px] px-3 mx-auto'>
       <div className="flex items-center justify-between">
         <div className="">
-          <h2 className='text-[50px] font-bold text-white'>Find the best talent</h2>
+          <h2 className='text-[50px] font-bold text-white px-5'>About</h2>
         </div>
         <div className="flex flex-col justify-between w-[500px] my-[25px]">
           <span className='w-[50px] h-[2px] bg-[#79C8C7]'></span>
@@ -20,3 +22,5 @@ export default function Page() {
     </div>
   )
 }
+
+export default page
