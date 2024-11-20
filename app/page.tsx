@@ -2,7 +2,7 @@
 import type { Metadata } from 'next'
  
 export const metadata: Metadata = {
-  title: 'My Page Title',
+  title: 'my website',
 }
  
 export default function Page() {
