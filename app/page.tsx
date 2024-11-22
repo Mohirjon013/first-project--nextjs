@@ -1,22 +1,42 @@
 
+"use client"
+import { useEffect, useState } from 'react'
 import type { Metadata } from 'next'
+import axios from 'axios'
+import UserItems from './components/UserItems';
  
-export const metadata: Metadata = {
-  title: 'my website',
+// export const metadata: Metadata = {
+//   title: 'my website',
+// };
+export interface UserType {
+  id:number;
+  email:string;
+  name:string;
+  website:string
 }
- 
+
 export default function Page() {
+  const [user, setUser] = useState<Array<UserType>>([])
+  const [use, setUse] = useState([])
+  useEffect(() => {
+    axios.get("https://jsonplaceholder.typicode.com/users").then(res => {
+      setUser(res.data.map((item:UserType) => {
+        const userData = {
+          id:item.id,
+          email:item.email,
+          name:item.name,
+          website:item.website
+        }
+        return userData
+      }))
+      setUse(res.data)
+    })
+  },[])
+  console.log(use);
+  
   return (
-    <div className='bg-[#014E56] w-[1250px] px-3 mx-auto'>
-      <div className="flex items-center justify-between">
-        <div className="">
-          <h2 className='text-[50px] font-bold text-white'>Find the best talent</h2>
-        </div>
-        <div className="flex flex-col justify-between w-[500px] my-[25px]">
-          <span className='w-[50px] h-[2px] bg-[#79C8C7]'></span>
-          <p className='text-white font-semibold text-[18px] pt-10'>Finding the right people and building high performing teams can be hard. Most companies aren’t tapping into the abundance of global talent. We’re about to change that.</p>
-        </div>
-      </div>
+    <div className=' w-[1250px] flex flex-wrap justify-between px-3 p-2 gap-y-4 mx-auto'>
+      {user.map((item:UserType) => <UserItems key={item.id} item={item} />)}
     </div>
   )
 }
